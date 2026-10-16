@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login Dashboard</title>
+</head>
+<body>
+
+<h2>Login</h2>
+
+<input id="user" placeholder="Username">
+<input id="pass" type="password" placeholder="Password">
+<button onclick="login()">Login</button>
+
+<div id="dash" style="display:none">
+  <h2>Welcome, <span id="name"></span>!</h2>
+  <button onclick="logout()">Logout</button>
+</div>
+
+<script>
+function login() {
+  let u = user.value, p = pass.value;
+
+  if (u && p) {
+    localStorage.setItem("username", u);
+    sessionStorage.setItem("login", "true");
+    show();
+  } else alert("Enter username and password");
+}
+
+function show() {
+  if (sessionStorage.getItem("login") == "true") {
+    document.querySelector("body").innerHTML =
+    `<h2>Welcome, ${localStorage.getItem("username")}!</h2>
+     <button onclick="logout()">Logout</button>`;
+  }
+}
+
+function logout() {
+  localStorage.clear();
+  sessionStorage.clear();
+  location.reload();
+}
+
+show();
+</script>
+
+</body>
+</html>
